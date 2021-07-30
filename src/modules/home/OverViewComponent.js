@@ -135,7 +135,7 @@ const AddTransactionView = (props) => {
         />
         <label htmlFor="income">Income</label>
       </RadioBox>
-      <AddTransaction onClick={addTransaction}>Add Transaction</AddTransaction>
+      <AddTransaction onClick={addTransaction}>Add Transactions</AddTransaction>
     </AddTransactionContainer>
   );
 };
