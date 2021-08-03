@@ -62,7 +62,6 @@ const TransactionsComponent = (props) => {
     useEffect(() => {
       filterData(searchText);
     }, [props.transactions]);
-    
     return(
     <Container>
       Transactions
@@ -74,7 +73,7 @@ const TransactionsComponent = (props) => {
       />
       {filteredTransaction?.length
         ? filteredTransaction.map((payload) => (
-            <TransactionCell payload={payload} />
+            <TransactionCell key={payload} payload={payload} />
           ))
         : ""}
     </Container>

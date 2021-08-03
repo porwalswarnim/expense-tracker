@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import OverViewComponent from "./OverViewComponent";
 import TransactionsComponent from "./TransactionsComponent.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
   background-color: white;
@@ -13,29 +14,33 @@ const Container = styled.div`
   width: 360px;
   align-items: center;
   justify-content: space-between;
-`;
-const HomeComponent = (props) => {
-  const [transactions, updateTransaction] = useState([]);
+`; 
+const ExpenseUsingClass = (props) => {
+  const transactions= useSelector(state => state.transactions)
+  const dispatch = useDispatch()
+  // const [transactions, updateTransaction] = useState([]);
   const [expense, updateExpense] = useState(0);
   const [income, updateIncome] = useState(0);
+
+  useEffect(() => calculateBalance(), [transactions]);
 
   const calculateBalance = () => {
     let exp = 0;
     let inc = 0;
-    transactions.map((payload) =>
-      payload.type === "EXPENSE"
-        ? (exp = exp + payload.amount)
-        : (inc = inc + payload.amount)
+    transactions.map((p) =>
+      p.type === "EXPENSE"
+        ? (exp = exp + p.amount)
+        : (inc = inc + p.amount)
     );
     updateExpense(exp);
     updateIncome(inc);
   };
-  useEffect(() => calculateBalance(), [transactions]);
 
   const addTransaction = (payload) => {
-    const transactionArray = [...transactions];
-    transactionArray.push(payload);
-    updateTransaction(transactionArray);
+    // const transactionArray = [...transactions];
+    // transactionArray.push(payload);
+    dispatch({type:"UPDATE_TRANSACTIONS",payload})
+    // updateTransaction(transactionArray);
   };
   return (
     <Container>
@@ -44,8 +49,8 @@ const HomeComponent = (props) => {
         expense={expense}
         income={income}
       />
-      <TransactionsComponent transactions={transactions} />
+      <TransactionsComponent transactions={transactions} /> 
     </Container>
   );
 };
-export default HomeComponent;
+export default ExpenseUsingClass;

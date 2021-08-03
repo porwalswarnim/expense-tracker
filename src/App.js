@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import HomeComponent from "./modules/home";
-
+import ExpenseUsingClassComponent from "./modules/home/ExpenseUsingClassComponent";
+import "bootstrap/dist/css/bootstrap.min.css";
 const Container = styled.div`
   background-color: white;
   color: #0d1d2c;
@@ -25,11 +26,20 @@ const Header = styled.div`
   font-size: 25px;
   font-weight: bold;
 `;
+
 function App() {
   return (
     <Container>
-      <Header>Expense Tracker</Header>
-      <HomeComponent />
+      <div className="row col-lg-12">
+        <div className="col-lg-6">
+          <Header>Expense Tracker Using Class Component</Header>
+          <ExpenseUsingClassComponent />
+        </div>
+        <div className="col-lg-6">
+          <Header>Expense Tracker Using Functional Component</Header>
+          <HomeComponent />
+        </div>
+      </div>
     </Container>
   );
 }
